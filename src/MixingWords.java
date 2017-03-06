@@ -3,42 +3,64 @@ import java.util.Scanner;
 public class MixingWords {
 	 public static void main(String []args){
 		 	
-		 //þimdi girilen cümleyi tutacak bir string bulayým.
+		 //Let's define a string to keep our whole sentence or words together.
 		 
-		 String cümle ="";
-		 Scanner k = new Scanner(System.in);
-		 System.out.println("Cümlenizi girin");
-		 cümle=k.nextLine();
+		 String keeper ="";
+		 
+		 //Input variable
+		 Scanner k = new Scanner(System.in);		 
+		 System.out.println("Put your words or sentence here");
+		 
+		 //Keeping input
+		 keeper=k.nextLine();
+		 
 		 String modchar ;
-		 String bos ="";
+		 
+		 //Empty string to keep the changes
+		 String empty ="";
+		 
+		 //variable a is our cycle number of mixing.
 		 int a=0;
-		 int sayac=0;
-		 String cümlesonu=cümle.substring(cümle.lastIndexOf(" ")+1,cümle.length());
+		 int counter=0;
+		 
+		 // we need to seperate keep the sentence as words 
+		 // to check  whether we finished the word or not
+		 String endOfKeeper=keeper.substring(keeper.lastIndexOf(" ")+1,keeper.length());
+		 System.out.println("endOfKeeper :"+endOfKeeper);
+		 
+		 //char c is defined  to keep  splitted  the characters...of 
 		 char []c = null;
+		 //Also we need char variable to mix the chars without losing orginal one.
 		 char temp;
-		 int leng=cümle.length();
+		 //Actual length of orjinal structure.
+		 int length=keeper.length();
 		 
 		
-		
-		 while(bos.length()<=leng){
-			// System.out.println(cümle.substring(cümle.indexOf(""),cümle.lastIndexOf("")));
+		//Our condition is up to empty string's length till it get equal length of actual sentence
+		 
+		 while(empty.length()<=length){
+		 
 			
-			 
-			 if(cümle.length()==cümlesonu.length()){
-				c=cümlesonu.toCharArray();
+			 //Checking if it got equal length at first then transfer process
+			 if(keeper.length()==endOfKeeper.length()){
+				c=endOfKeeper.toCharArray();
 			 }
 			 
-				else
-				{
-				 modchar=cümle.substring(cümle.indexOf(""),cümle.indexOf(" "));
-				 c=modchar.toCharArray();
-				}
+			 //or 
+			 else{
+				 
+				 //taking word by word delimetering by " "space 
+			 modchar=keeper.substring(keeper.indexOf(""),keeper.indexOf(" "));
+			 //after delimetered word kept in char array.
+			 c=modchar.toCharArray();
+			 }
 			 
 			 	
 			 
 			
 			 
-			 // Cümle baþý space silme için
+			 // To clean the space characters at the first column of word.
+			 //and if the word less then 3 we  won't mix 
 			 if(c.length>3){
 				 if(c[0]==' '){
 					 StringBuilder sb =new StringBuilder();
@@ -46,7 +68,12 @@ public class MixingWords {
 					 sb.deleteCharAt(0);
 					 c=sb.toString().toCharArray();
 			
-				// ilk ve son elemaný sabit tutup harfleri karýþtýrmak için	 
+				// This is main process which is mixing up the words by keeping both 
+					 //first letter and last letter constant .
+					 
+					 //Also we have some rule to mix up 
+					 //Mixing cycle is up to our word's length.
+					 
 				 }
 				 do {
 					 
@@ -66,32 +93,37 @@ public class MixingWords {
 						 a=5;
 					}
 				
-				 for(int i=1;i<=c.length-2;i++)
-				 {
-				 int x=(int)(Math.random()*(c.length-2)+1);
-				 temp=c[i];
-				 c[i]=c[x];
-				 c[x]=temp;
+					
+				 for(int i=1;i<=c.length-2;i++){
+					 
+						 int x=(int)(Math.random()*(c.length-2)+1);
+						 temp=c[i];
+						 c[i]=c[x];
+						 c[x]=temp;
+						 
+				 	}
 				 
-				 }sayac++;
-				 }while(sayac==a);
+				 	counter++;
+				 }while(counter==a);
+				
 				 
 				 
 			 
 			 }
 			 
-			 //char dizisnini stringte toplayýp eskisini silip yenisini eklmek için
+			 //To convert the char array of a word to a new mixed word string.
 			 String out=new String(c);
-			 //karýþýk char dizilierini tekrar birleþtirme
-			 bos=bos+out+" ";
-			 //sýradaki kelimeye geçmek için
-			 cümle=cümle.substring(cümle.indexOf(" ")+1,cümle.length());
+			 //making one the  whole mixed word in
+			 empty=empty+out+" ";
+			 
+			 //After process completed for a word then  we are taking our next word for next mixing.
+			 keeper=keeper.substring(keeper.indexOf(" ")+1,keeper.length());
 			 
 			 }
 		
 			
-		 System.out.print(bos);
-		 String ll=k.nextLine();
+		 System.out.print(empty);
+		 
 		 }
 		
 		
